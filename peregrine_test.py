@@ -2,7 +2,8 @@ import multiprocessing as mp
 import time
 
 NUM_WORKERS = 32
-ITERATIONS = 1000
+ITERATIONS = 10000
+
 
 def worker_func(worker_id, message_queue):
     """
@@ -18,7 +19,7 @@ def worker_func(worker_id, message_queue):
         message_queue.put(i)
         average_put_time += time.time() - put_time
     average_put_time /= ITERATIONS
-    print("Worker " + str(worker_id) + " average put time: " + str(average_put_time))
+    print("Worker " + str(worker_id) + " average put time: " + str.format('{0:.6f}', (average_put_time*1000)) + "ms")
 
 
 def start_workers(message_queue):
@@ -27,7 +28,7 @@ def start_workers(message_queue):
     :param message_queue:
     :return: A list of all child processes (workers).
     """
-    startTime = time.time()
+    start_time = time.time()
     print("*********************************************************************")
     print("Initializing workers...")
     workers = []
@@ -35,9 +36,9 @@ def start_workers(message_queue):
         worker = mp.Process(target=worker_func, args=(i, message_queue))
 
         worker.start()
-        workers.append(p)
+        workers.append(worker)
     print("Workers initialized.")
-    print("Initialization time elapsed:   " + str.format('{0:.3f}', (time.time() - startTime)/1000) + "ms")
+    print("Initialization time elapsed:   " + str.format('{0:.6f}', (time.time() - start_time)*1000) + "ms")
     print("*********************************************************************")
     return workers
 
@@ -50,13 +51,13 @@ def terminate_workers(workers):
     """
     print("*********************************************************************")
     print("Terminating collectors...")
-    startTime = time.time()
+    start_time = time.time()
     for worker in workers:
         worker.terminate()
         # if not p.is_alive():
         worker.join(timeout=0.001)
     print("Collectors terminated.")
-    print("Termination time elapsed:   " + str.format('{0:.3f}', (time.time() - startTime)/1000) + "ms")
+    print("Termination time elapsed:   " + str.format('{0:.6f}', (time.time() - start_time)*1000) + "ms")
     print("*********************************************************************")
 
 
@@ -75,19 +76,21 @@ def trainer_func(message_queue):
         data.append(data_point)
         average_dequeue_time += time.time() - dequeue_time
     average_dequeue_time /= ITERATIONS*NUM_WORKERS
-    print("Trainer total dequeue time: " + str.format('{0:.3f}', (time.time() - trainer_start_time)/1000) + "ms" )
-    print("Trainer average dequeue time: " + str.format('{0:.3f}', average_dequeue_time) + "ms")
-
-
+    print("-------------------------------------")
+    print("Trainer total dequeue time: " + str.format('{0:.6f}', (time.time() - trainer_start_time)*1000) + "ms")
+    print("Trainer average dequeue time: " + str.format('{0:.6f}', average_dequeue_time*1000) + "ms")
+    print("-------------------------------------")
 
 
 def run():
+    total_time_start = time.time()
     message_queue = mp.Queue()
     workers = start_workers(message_queue)
     trainer = mp.Process(target=trainer_func, args=(message_queue,))
     trainer.start()
     trainer.join()
     terminate_workers(workers)
+    print("Total test elapsed time: " + str.format('{0:.6f}', (time.time() - total_time_start)*1000) + "ms")
 
 
 if __name__ == '__main__':

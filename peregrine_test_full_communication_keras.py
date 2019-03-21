@@ -2,10 +2,12 @@ import multiprocessing as mp
 import time
 import numpy as np
 import keras
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' #This suppresses tensorflow AVX warnings
 
 
 NUM_WORKERS = 32
-ITERATIONS = 10000
+ITERATIONS = 1000
 NETWORK_INPUT_SIZE = 100
 NETWORK_OUTPUT_SIZE = 2
 
@@ -50,20 +52,20 @@ def worker_func(worker_id, w2t_m_queue, events, t2w_d_manager):
     """
     average_iteration_time = 0
     worker_nn = create_neural_network()
+    iteration_time = time.time()
     for i in range(ITERATIONS):
         data_point = create_data_point(worker_nn)
         events["Workers_can_proceed"].clear()
-        put_time = time.time()
         w2t_m_queue.put(data_point)
         # Signal trainer that this worker has placed its data point this iteration
         events[worker_id].set()
+        average_iteration_time += (time.time() - iteration_time)
         # Have worker wait until trainer is done processing this iteration
         events["Workers_can_proceed"].wait()
+        iteration_time = time.time()
         # Obtain data trainer has placed into shared manager (data is weights of network)
         shared_data = t2w_d_manager[0]
         worker_nn.set_weights(shared_data)
-
-        average_iteration_time += (time.time() - put_time)
 
     average_iteration_time /= ITERATIONS
     print("Worker " + str(worker_id) + " average put time: " + str.format('{0:.6f}', (average_iteration_time*1000)) + "ms")
@@ -116,7 +118,7 @@ def do_something_with_data(data, trainer_nn):
     :param trainer_nn:
     :return: The trained network's weights, ready to be sent to the workers.
     """
-    inputs = np.array(data[0])
+    inputs = np.array(data)
     targets = np.ones((NUM_WORKERS, NETWORK_OUTPUT_SIZE))
     trainer_nn.train_on_batch(inputs, targets)
     network_weights = trainer_nn.get_weights()
@@ -137,22 +139,22 @@ def trainer_func(w2t_m_queue, events, t2w_d_manager):
     trainer_nn = create_neural_network()
     t2w_d_manager.append(trainer_nn.get_weights())
     for i in range(ITERATIONS):
-        data = []
         # Wait for all workers to send their ready signals
         for worker_num in range(NUM_WORKERS):
             events[worker_num].wait()
             events[worker_num].clear()
-        dequeue_time = time.time()
+        iteration_time = time.time()
+        data = []
         # Dequeue batch of data from message queue and process it
         for _ in range(NUM_WORKERS):
             data_point = w2t_m_queue.get()
-            data.append(data_point)
+            data.append(data_point[0])
         message_to_share = do_something_with_data(data, trainer_nn)
         # Put weight data into manager
         t2w_d_manager[0] = message_to_share
         # Signal to workers they are allow to proceed
         events["Workers_can_proceed"].set()
-        average_iteration_time += time.time() - dequeue_time
+        average_iteration_time += time.time() - iteration_time
 
     average_iteration_time /= ITERATIONS*NUM_WORKERS
     print("-------------------------------------")

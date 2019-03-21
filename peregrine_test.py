@@ -2,7 +2,7 @@ import multiprocessing as mp
 import time
 
 NUM_WORKERS = 32
-ITERATIONS = 10000
+ITERATIONS = 1000
 
 
 def worker_func(worker_id, message_queue):

@@ -3,7 +3,7 @@ import time
 
 NUM_WORKERS = 32
 ITERATIONS = 1000
-MANAGER_SIZE = 100000
+MANAGER_SIZE = 20000
 
 
 def create_data_point(shared_data):

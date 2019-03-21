@@ -23,6 +23,7 @@ def create_neural_network():
     network_output = keras.layers.Dense(NETWORK_OUTPUT_SIZE, kernel_initializer='random_uniform', activation='linear')(network_layer)
     network = keras.models.Model(inputs=network_input, outputs=network_output)
     network.compile(loss="mse", optimizer="Adam")
+    print(network.summary())
     return network
 
 

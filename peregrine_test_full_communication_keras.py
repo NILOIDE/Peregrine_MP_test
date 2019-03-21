@@ -1,14 +1,38 @@
 import multiprocessing as mp
 import time
+import numpy as np
+import keras
 
-NUM_WORKERS = 32
+
+NUM_WORKERS = 1
 ITERATIONS = 10000
-MANAGER_SIZE = 100000
+NETWORK_INPUT_SIZE = 100
+NETWORK_OUTPUT_SIZE = 2
 
 
-def create_data_point(shared_data):
-    time.sleep(0.001)
-    return 1
+def create_neural_network():
+    """
+    Create a neural network using Keras that the worker will use to process data.
+    :return: The neural network
+    """
+    network_input = keras.layers.Input((NETWORK_INPUT_SIZE,))
+    network_layer = keras.layers.Dense(100, kernel_initializer='random_uniform', activation='tanh')(network_input)
+    network_layer = keras.layers.Dense(100, kernel_initializer='random_uniform', activation='tanh')(network_layer)
+    network_output = keras.layers.Dense(NETWORK_OUTPUT_SIZE, kernel_initializer='random_uniform', activation='linear')(network_layer)
+    network = keras.models.Model(inputs=network_input, outputs=network_output)
+    network.compile(loss="mse", optimizer="Adam")
+    return network
+
+
+def create_data_point(worker_nn):
+    """
+    Use worker's neural network to create a data point. A data point is the network's input and output.
+    :param worker_nn:
+    :return:
+    """
+    data_point = np.random.rand(1, NETWORK_INPUT_SIZE)
+    _ = worker_nn.predict(data_point)
+    return data_point
 
 
 def worker_func(worker_id, w2t_m_queue, events, t2w_d_manager):
@@ -25,9 +49,9 @@ def worker_func(worker_id, w2t_m_queue, events, t2w_d_manager):
     :return:
     """
     average_iteration_time = 0
-    shared_data = []
+    worker_nn = create_neural_network()
     for i in range(ITERATIONS):
-        data_point = create_data_point(shared_data)
+        data_point = create_data_point(worker_nn)
         events["Workers_can_proceed"].clear()
         put_time = time.time()
         w2t_m_queue.put(data_point)
@@ -35,8 +59,10 @@ def worker_func(worker_id, w2t_m_queue, events, t2w_d_manager):
         events[worker_id].set()
         # Have worker wait until trainer is done processing this iteration
         events["Workers_can_proceed"].wait()
-        # Obtain data trainer has placed into shared manager
-        shared_data = t2w_d_manager
+        # Obtain data trainer has placed into shared manager (data is weights of network)
+        shared_data = t2w_d_manager[0]
+        worker_nn.set_weights(shared_data)
+
         average_iteration_time += (time.time() - put_time)
 
     average_iteration_time /= ITERATIONS
@@ -83,9 +109,18 @@ def terminate_workers(workers):
     print("*********************************************************************")
 
 
-def do_something_with_data(data):
-    time.sleep(0.001)
-    return [1 for i in range(MANAGER_SIZE)]
+def do_something_with_data(data, trainer_nn):
+    """
+    Network is trained.
+    :param data:
+    :param trainer_nn:
+    :return: The trained network's weights, ready to be sent to the workers.
+    """
+    inputs = np.array(data[0])
+    targets = np.ones((NUM_WORKERS, NETWORK_OUTPUT_SIZE))
+    trainer_nn.train_on_batch(inputs, targets)
+    network_weights = trainer_nn.get_weights()
+    return network_weights
 
 
 def trainer_func(w2t_m_queue, events, t2w_d_manager):
@@ -99,8 +134,10 @@ def trainer_func(w2t_m_queue, events, t2w_d_manager):
     """
     average_iteration_time = 0
     trainer_start_time = time.time()
-    data = []
+    trainer_nn = create_neural_network()
+    t2w_d_manager.append(trainer_nn.get_weights())
     for i in range(ITERATIONS):
+        data = []
         # Wait for all workers to send their ready signals
         for worker_num in range(NUM_WORKERS):
             events[worker_num].wait()
@@ -110,9 +147,9 @@ def trainer_func(w2t_m_queue, events, t2w_d_manager):
         for _ in range(NUM_WORKERS):
             data_point = w2t_m_queue.get()
             data.append(data_point)
-        message_to_share = do_something_with_data(data)
-        # Put data into manager
-        t2w_d_manager = message_to_share
+        message_to_share = do_something_with_data(data, trainer_nn)
+        # Put weight data into manager
+        t2w_d_manager[0] = message_to_share
         # Signal to workers they are allow to proceed
         events["Workers_can_proceed"].set()
         average_iteration_time += time.time() - dequeue_time
@@ -138,6 +175,14 @@ def create_events():
 
 
 def run():
+    """
+    The program consists of one child process that trains (trainer) and n amount of child processes that collect
+    data (workers). Events are used to synchronize the workers and trainer such that while the trainer trains, the
+    workers wait, and vice versa. Workers gather data in parallel. The workers place the data into a shared message
+    queue, which the trainer dequeues from. After the trainer finishes one training iteration, it places the weights
+    into the shared manager list, which the workers can access and update their networks.
+    :return:
+    """
     total_time_start = time.time()
     events = create_events()
     worker_to_trainer_message_queue = mp.Queue()

@@ -3,5 +3,5 @@
 #SBATCH --mem=1000
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
-#SBATCH --output=test_full_large_com_4core.out
-python ./peregrine_test_full_large_communication.py
+#SBATCH --output=test_full_com_keras_4core.out
+python ./peregrine_test_full_communication_keras.py

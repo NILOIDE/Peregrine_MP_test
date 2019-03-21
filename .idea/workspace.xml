@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b0b2e78-1eef-444c-b8a5-55d3157e6d3d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/peregrine_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/peregrine_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peregrine_test_synchronized.py" beforeDir="false" afterPath="$PROJECT_DIR$/peregrine_test_synchronized.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peregrine_test_synchronized_with_prints.py" beforeDir="false" afterPath="$PROJECT_DIR$/peregrine_test_synchronized_with_prints.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +18,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/peregrine_test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="555">
+                <state relative-caret-position="1411">
                   <caret line="83" selection-start-line="83" selection-end-line="83" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
@@ -30,7 +31,7 @@
             <entry file="file://$PROJECT_DIR$/peregrine_test_synchronized.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="51">
-                  <caret line="4" column="17" lean-forward="true" selection-end-line="142" />
+                  <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
                 </state>
               </provider>
             </entry>
@@ -38,8 +39,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/peregrine_test_synchronized_with_prints.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="522">
-                  <caret line="104" column="15" selection-start-line="104" selection-start-column="15" selection-end-line="104" selection-end-column="15" />
+                <state relative-caret-position="34">
+                  <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
                 </state>
               </provider>
             </entry>
@@ -74,8 +75,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/peregrine_test.py" />
-        <option value="$PROJECT_DIR$/peregrine_test_synchronized.py" />
         <option value="$PROJECT_DIR$/peregrine_test_synchronized_with_prints.py" />
+        <option value="$PROJECT_DIR$/peregrine_test_synchronized.py" />
       </list>
     </option>
   </component>
@@ -161,16 +162,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/peregrine_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../A.I.gar/src/aigar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -178,17 +169,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/peregrine_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/peregrine_test_synchronized.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="4" column="17" lean-forward="true" selection-end-line="142" />
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/peregrine_test_synchronized_with_prints.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="104" column="15" selection-start-line="104" selection-start-column="15" selection-end-line="104" selection-end-column="15" />
+        <state relative-caret-position="34">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
         </state>
       </provider>
     </entry>

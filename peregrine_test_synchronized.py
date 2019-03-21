@@ -1,8 +1,8 @@
 import multiprocessing as mp
 import time
 
-NUM_WORKERS = 3
-ITERATIONS = 1000
+NUM_WORKERS = 32
+ITERATIONS = 10000
 
 
 def create_data_point():

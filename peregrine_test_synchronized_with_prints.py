@@ -1,7 +1,7 @@
 import multiprocessing as mp
 import time
 
-NUM_WORKERS = 3
+NUM_WORKERS = 32
 ITERATIONS = 10000
 
 

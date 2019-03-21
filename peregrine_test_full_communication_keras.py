@@ -4,7 +4,7 @@ import numpy as np
 import keras
 
 
-NUM_WORKERS = 1
+NUM_WORKERS = 32
 ITERATIONS = 10000
 NETWORK_INPUT_SIZE = 100
 NETWORK_OUTPUT_SIZE = 2

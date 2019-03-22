@@ -1,0 +1,45 @@
+Using TensorFlow backend.
+*********************************************************************
+Initializing workers...
+Workers initialized.
+Initialization time elapsed:   839.644670ms
+*********************************************************************
+slurmstepd: error: *** JOB 4823885 ON pg-node023 CANCELLED AT 2019-03-22T00:16:50 DUE TO TIME LIMIT ***
+
+
+###############################################################################
+Peregrine Cluster
+Job 4823885 for user 'f115844'
+Finished at: Fri Mar 22 00:16:51 CET 2019
+
+Job details:
+============
+
+Name                : test_full_com_keras_4core.sh
+User                : f115844
+Partition           : regular
+Nodes               : pg-node023
+Cores               : 4
+State               : CANCELLED,TIMEOUT
+Submit              : 2019-03-21T23:15:48
+Start               : 2019-03-21T23:16:24
+End                 : 2019-03-22T00:16:51
+Reserved walltime   : 01:00:00
+Used walltime       : 01:00:27
+Used CPU time       : 00:17:59 (efficiency:  7.44%)
+% User (Computation): 74.78%
+% System (I/O)      : 25.22%
+Mem reserved        : 10000M/node
+Max Mem used        : 1.13G (pg-node023)
+Max Disk Write      : 20.48K (pg-node023)
+Max Disk Read       : 1.04M (pg-node023)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

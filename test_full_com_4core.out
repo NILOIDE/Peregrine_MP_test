@@ -1,0 +1,77 @@
+*********************************************************************
+Initializing workers...
+Workers initialized.
+Initialization time elapsed:   27.373075ms
+*********************************************************************
+-------------------------------------
+Trainer total dequeue time: 2.997139ms
+Trainer average dequeue time: 0.040795ms
+-------------------------------------
+Worker 4 average put time: 1.892033ms
+Worker 12 average put time: 1.895200ms
+Worker 3 average put time: 1.848556ms
+Worker 11 average put time: 1.880113ms
+Worker 29 average put time: 1.885805ms
+Worker 10 average put time: 1.883475ms
+Worker 17 average put time: 1.886957ms
+Worker 24 average put time: 1.892342ms
+Worker 22 average put time: 1.885640ms
+Worker 7 average put time: 1.896820ms
+Worker 13 average put time: 1.897856ms
+Worker 8 average put time: 1.905794ms
+Worker 25 average put time: 1.898722ms
+Worker 9 average put time: 1.872031ms
+Worker 28 average put time: 1.878888ms
+Worker 23 average put time: 1.891311ms
+Worker 30 average put time: 1.876025ms
+Worker 26 average put time: 1.888422ms
+Worker 18 average put time: 1.893317ms
+Worker 19 average put time: 1.889532ms
+Worker 31 average put time: 1.890331ms
+Worker 20 average put time: 1.886869ms
+Worker 27 average put time: 1.884067ms
+Worker 21 average put time: 1.896044ms
+*********************************************************************
+Terminating collectors...
+Collectors terminated.
+Termination time elapsed:   11.162996ms
+*********************************************************************
+Total test elapsed time: 3123.265028ms
+
+
+###############################################################################
+Peregrine Cluster
+Job 4823867 for user 'f115844'
+Finished at: Thu Mar 21 22:46:18 CET 2019
+
+Job details:
+============
+
+Name                : test_full_com_4core.sh
+User                : f115844
+Partition           : regular
+Nodes               : pg-node049
+Cores               : 4
+State               : COMPLETED
+Submit              : 2019-03-21T22:46:07
+Start               : 2019-03-21T22:46:14
+End                 : 2019-03-21T22:46:18
+Reserved walltime   : 00:10:00
+Used walltime       : 00:00:04
+Used CPU time       : 00:00:03 (efficiency: 22.09%)
+% User (Computation): 54.20%
+% System (I/O)      : 45.77%
+Mem reserved        : 1000M/node
+Max Mem used        : 0.00  (pg-node049)
+Max Disk Write      : 0.00  (pg-node049)
+Max Disk Read       : 0.00  (pg-node049)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

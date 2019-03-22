@@ -23,7 +23,6 @@ def create_neural_network():
     network_output = keras.layers.Dense(NETWORK_OUTPUT_SIZE, kernel_initializer='random_uniform', activation='linear')(network_layer)
     network = keras.models.Model(inputs=network_input, outputs=network_output)
     network.compile(loss="mse", optimizer="Adam")
-    print(network.summary())
     return network
 
 
@@ -35,6 +34,7 @@ def create_data_point(worker_nn):
     """
     data_point = np.random.rand(1, NETWORK_INPUT_SIZE)
     _ = worker_nn.predict(data_point)
+    time.sleep(0.001)
     return data_point
 
 
@@ -123,6 +123,7 @@ def do_something_with_data(data, trainer_nn):
     targets = np.ones((NUM_WORKERS, NETWORK_OUTPUT_SIZE))
     trainer_nn.train_on_batch(inputs, targets)
     network_weights = trainer_nn.get_weights()
+    time.sleep(0.001)
     return network_weights
 
 

@@ -1,0 +1,24 @@
+*********************************************************************
+Initializing workers...
+Workers initialized.
+Initialization time elapsed:   302.257299ms
+*********************************************************************
+-------------------------------------
+Trainer total dequeue time: 32.332165ms
+Trainer average dequeue time: 0.119049ms
+-------------------------------------
+Worker 26 average put time: 14.065723ms
+Worker 12 average put time: 14.560611ms
+Worker 11 average put time: 15.269210ms
+Worker 13 average put time: 14.354859ms
+Worker 29 average put time: 14.716465ms
+Worker 23 average put time: 15.002109ms
+Worker 27 average put time: 14.540824ms
+Worker 31 average put time: 13.928328ms
+Worker 15 average put time: 14.993794ms
+*********************************************************************
+Terminating collectors...
+Collectors terminated.
+Termination time elapsed:   57.620764ms
+*********************************************************************
+Total test elapsed time: 32997.862577ms

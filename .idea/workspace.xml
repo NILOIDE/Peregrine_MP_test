@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b0b2e78-1eef-444c-b8a5-55d3157e6d3d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/outs/test_full_com_keras_4core.out" beforeDir="false" afterPath="$PROJECT_DIR$/outs/test_full_com_keras_4core.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peregrine_test_full_communication_keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/peregrine_test_full_communication_keras.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peregrine_test_full_communication_large.py" beforeDir="false" afterPath="$PROJECT_DIR$/peregrine_test_full_communication_large.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +14,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.64213043">
       <split-first>
         <leaf>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/peregrine_test_full_communication_keras.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="153">
@@ -27,11 +26,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/peregrine_test_full_communication_large.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="9" column="20" selection-start-line="9" selection-end-line="10" />
+                <state relative-caret-position="612">
+                  <caret line="82" column="58" selection-start-line="82" selection-start-column="58" selection-end-line="82" selection-end-column="58" />
                 </state>
               </provider>
             </entry>
@@ -92,12 +91,12 @@
       <list>
         <option value="$PROJECT_DIR$/peregrine_test_full_large_communication.py" />
         <option value="$PROJECT_DIR$/../A.I.gar/src/aigar.py" />
-        <option value="$PROJECT_DIR$/peregrine_test_full_communication_large.py" />
         <option value="$PROJECT_DIR$/peregrine_test_full_communication.py" />
         <option value="$PROJECT_DIR$/peregrine_test_synchronized.py" />
         <option value="$PROJECT_DIR$/peregrine_test_synchronized_with_prints.py" />
         <option value="$PROJECT_DIR$/peregrine_test.py" />
         <option value="$PROJECT_DIR$/peregrine_test_full_communication_keras.py" />
+        <option value="$PROJECT_DIR$/peregrine_test_full_communication_large.py" />
       </list>
     </option>
   </component>
@@ -224,13 +223,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/peregrine_test_full_communication_large.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="20" selection-start-line="9" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/peregrine_test_full_communication_keras.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -238,6 +230,13 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/peregrine_test_full_communication_large.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="82" column="58" selection-start-line="82" selection-start-column="58" selection-end-line="82" selection-end-column="58" />
         </state>
       </provider>
     </entry>

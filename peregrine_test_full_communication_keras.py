@@ -7,7 +7,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' #This suppresses tensorflow AVX warning
 
 
 NUM_WORKERS = 32
-ITERATIONS = 1000
+ITERATIONS = 10000
 NETWORK_INPUT_SIZE = 100
 NETWORK_OUTPUT_SIZE = 2
 
